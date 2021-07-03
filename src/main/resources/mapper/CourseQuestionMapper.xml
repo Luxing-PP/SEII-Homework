@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seecoder.courselearning.mapperservice.course.CourseQuestionMapper">
+    <resultMap id="MiniResultMap" type="cn.seecoder.courselearning.po.course.CourseQuestion">
+        <id column="id" property="id"/>
+        <result column="course_id"  property="course_id"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <resultMap id="FullResultMap" type="cn.seecoder.courselearning.po.course.CourseQuestion">
+        <id column="id" property="id"/>
+        <result column="course_id"  property="course_id"/>
+        <result column="description" property="description"/>
+        <result column="correct_answer" property="correct_answer"/>
+        <result column="explain" property="explain"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.seecoder.courselearning.po.course.CourseQuestion" useGeneratedKeys="true" keyProperty="id">
+        insert into course_question(course_id,answer_id,description)
+        VALUES (#{course_id,jdbcType=BIGINT},#{answer_id,jdbcType=BIGINT},#{description,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectByCourseId" parameterType="java.lang.Integer" resultMap="FullResultMap">
+        select c.id, c.course_id,c.description,t.correct_answer,t.explain
+        from `course_question` c
+        join `question_answer` as t
+        on c.answer_id = t.id
+        where c.course_id = #{courseId}
+        group by c.id;
+    </select>
+
+    <!--究竟麻烦居然要三表Join= =-->
+    <select id="selectByTestIdWithAnswer" resultType="java.lang.Integer" resultMap="FullResultMap">
+        select q.id, q.course_id,q.description,a.correct_answer,a.explain
+        from (`course_question` q
+        join `question_answer` as a
+        on q.answer_id = a.id)
+        join  (select question_id from `test_question` tq where tq.test_id = #{testId}) as t
+        on t.question_id = q.id
+        group by q.id;
+    </select>
+
+    <select id="selectByTestIdNoAnswer" resultType="java.lang.Integer" resultMap="MiniResultMap">
+        select q.id, q.course_id, q.description
+        from `course_question` q
+        join  (select question_id from `test_question` tq where tq.test_id = #{testId}) as t
+        on q.id = t.question_id
+        group by q.id;
+    </select>
+</mapper>

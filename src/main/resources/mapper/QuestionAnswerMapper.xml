@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seecoder.courselearning.mapperservice.course.QuestionAnswerMapper">
+    <insert id="insert" parameterType="cn.seecoder.courselearning.po.course.QuestionAnswer" useGeneratedKeys="true" keyProperty="id">
+        insert into `question_answer` (correct_answer, `explain`) VALUES (#{correct_answer}, #{explain});
+    </insert>
+</mapper>
