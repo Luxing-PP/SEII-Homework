@@ -213,14 +213,15 @@ CREATE TABLE `test` (
     `course_id` BIGINT NOT NULL ,
     `start_time` datetime(0) NULL DEFAULT NULL,
     `end_time`   datetime(0) NULL DEFAULT NULL,
+    `tname` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
     PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of test
 -- ----------------------------
-INSERT INTO `test` VALUES (1,1,'2021-06-13 10:00:00','2020-08-31 10:00:00'); #对应软工一的测试
-INSERT INTO `test` VALUES (2,2,'2021-06-13 10:00:00','2020-08-31 10:00:00'); #对应软工二的测试
+INSERT INTO `test` VALUES (1,1,'2021-06-13 10:00:00','2020-08-31 10:00:00','first-test'); #对应软工一的测试
+INSERT INTO `test` VALUES (2,2,'2021-06-13 10:00:00','2020-08-31 10:00:00','second-test'); #对应软工二的测试
 
 
 -- ----------------------------

@@ -9,4 +9,5 @@ import java.util.List;
 public interface TestService {
     List<CourseQuestionVO> getAllQuestionByTestId(Integer testId);
     ResultVO<TestVO> createTest(TestVO testVO);
+    List<TestVO> getAllTest(Integer courseId);
 }

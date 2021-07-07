@@ -25,7 +25,8 @@ public class TestController {
     @GetMapping("/getAllTest/{courseID}")
     public List<TestVO> getAllTest(@PathVariable Integer courseID){
         //todo
-        return null;
+        //搞定了（也许吧）——cjw
+        return testService.getAllTest(courseID);
     }
 
     @GetMapping("/getAllQuestion/{testID}")

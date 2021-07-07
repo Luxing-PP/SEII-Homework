@@ -11,6 +11,16 @@ public class Test {
     private LocalDateTime start_time;
     private LocalDateTime end_time;
 
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
+    }
+
+    private String tname;
+
     public Integer getId() {
         return id;
     }
