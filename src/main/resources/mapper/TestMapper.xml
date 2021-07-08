@@ -12,7 +12,7 @@
     <insert id="insert" parameterType="cn.seecoder.courselearning.po.test.Test" useGeneratedKeys="true" keyProperty="id">
         insert into `test` (course_id, start_time, end_time,tname) VALUES (#{course_id},#{start_time},#{end_time},#{tname});
     </insert>
-    <select id="selectByCourseId" resultType="cn.seecoder.courselearning.po.test.Test">
+    <select id="selectByCourseId" resultMap="BaseResultMap">
         select id, course_id, start_time, end_time, tname
         from test
         where course_id = #{courseId,jdbcType=INTEGER}

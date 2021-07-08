@@ -10,6 +10,7 @@ public class Test {
     private List<Integer> questionList;
     private LocalDateTime start_time;
     private LocalDateTime end_time;
+    private String tname;
 
     public String getTname() {
         return tname;
@@ -19,7 +20,6 @@ public class Test {
         this.tname = tname;
     }
 
-    private String tname;
 
     public Integer getId() {
         return id;

@@ -26,10 +26,11 @@ public class TestServiceImpl implements TestService {
     private TestMapper testMapper;
     @Resource
     private TestQuestionMapper testQuestionMapper;
-
+    @Resource
+    private TestResultMapper testResultMapper;
+    @Resource
     private CourseQuestionService questionService;
 
-    private TestResultMapper testResultMapper;
     @Autowired
     public void setQuestionService(CourseQuestionService questionService) {
         this.questionService = questionService;
@@ -82,6 +83,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public ResultVO<TestVO> submitAnswer(Integer studentID, Integer testID, String answer) {
         int res;
+
         res=testResultMapper.insertResultList(testID,studentID,answer);
         Test test=new Test();
         if(res<=0){

@@ -252,6 +252,7 @@ CREATE TABLE `test_result`(
   `test_id` BIGINT NOT NULL,
   `user_id` BIGINT NOT NULL,
   `user_answer` VARCHAR(255)  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_score` INTEGER,
   PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
