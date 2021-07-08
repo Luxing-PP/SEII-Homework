@@ -40,6 +40,6 @@ public class TestController {
                                          @PathVariable Integer testID,
                                          @RequestParam String answer){
         //todo 这个我就没搞懂HH
-        return null;
+        return testService.submitAnswer(studentID,testID,answer);
     }
 }

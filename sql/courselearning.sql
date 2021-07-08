@@ -249,8 +249,8 @@ INSERT INTO `test_question` (id, question_id, test_id) VALUES (4,4,2);
 DROP TABLE IF EXISTS `test_result`;
 CREATE TABLE `test_result`(
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `user_id` BIGINT NOT NULL,
   `test_id` BIGINT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   `user_answer` VARCHAR(255)  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;

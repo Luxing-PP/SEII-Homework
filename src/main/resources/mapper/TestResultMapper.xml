@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seecoder.courselearning.mapperservice.test.TestResultMapper">
+    <insert id="insertResultList" useGeneratedKeys="false">
+        insert into
+            `test_result`
+            (user_id,student_id,answer)
+            VALUES
+                (#{test_id},#{student_id},#{answer})
+    </insert>
+</mapper>

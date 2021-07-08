@@ -2,6 +2,7 @@ package cn.seecoder.courselearning.serviceimpl.test;
 
 import cn.seecoder.courselearning.mapperservice.test.TestMapper;
 import cn.seecoder.courselearning.mapperservice.test.TestQuestionMapper;
+import cn.seecoder.courselearning.mapperservice.test.TestResultMapper;
 import cn.seecoder.courselearning.po.course.CourseWare;
 import cn.seecoder.courselearning.po.test.Test;
 import cn.seecoder.courselearning.service.Test.TestService;
@@ -28,6 +29,7 @@ public class TestServiceImpl implements TestService {
 
     private CourseQuestionService questionService;
 
+    private TestResultMapper testResultMapper;
     @Autowired
     public void setQuestionService(CourseQuestionService questionService) {
         this.questionService = questionService;
@@ -75,5 +77,17 @@ public class TestServiceImpl implements TestService {
             ret.add(new TestVO(test1));
         }
         return ret;
+    }
+
+    @Override
+    public ResultVO<TestVO> submitAnswer(Integer studentID, Integer testID, String answer) {
+        int res;
+        res=testResultMapper.insertResultList(testID,studentID,answer);
+        Test test=new Test();
+        if(res<=0){
+            return new ResultVO<>(Constant.REQUEST_FAIL,"服务器内部错误");
+        }else {
+            return new ResultVO<>(Constant.REQUEST_SUCCESS,"提交成功！",new TestVO(test));
+        }
     }
 }
