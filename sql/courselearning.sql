@@ -198,7 +198,7 @@ CREATE TABLE `question_answer`(
 -- ----------------------------
 -- Records of question_answer
 -- ----------------------------
-INSERT INTO `question_answer` VALUES (1,'软工一第一题答案','我咋知道咋做');
+INSERT INTO `question_answer` VALUES (1,'A','我咋知道咋做');
 INSERT INTO `question_answer` VALUES (2,'软工一第二题答案','我咋知道咋做');
 INSERT INTO `question_answer` VALUES (3,'软工二第一题答案','我咋知道咋做');
 INSERT INTO `question_answer` VALUES (4,'软工二第二题答案','我咋知道咋做');
@@ -252,7 +252,7 @@ CREATE TABLE `test_result`(
   `test_id` BIGINT NOT NULL,
   `user_id` BIGINT NOT NULL,
   `user_answer` VARCHAR(255)  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `user_score` INTEGER,
+  `user_score` DOUBLE,
   PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 

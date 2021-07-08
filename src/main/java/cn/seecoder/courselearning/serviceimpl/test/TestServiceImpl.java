@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,11 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<CourseQuestionVO> getAllQuestionByTestId(Integer testId) {
         //todo 怎么决定返回哪个你们决定叭，实现反正都实现了
-        if(true){
+        //比较当前时间是否已结束测试
+        Test test;
+        test=testMapper.selectByPrimaryKey(testId);
+        LocalDateTime localDateTime=LocalDateTime.now();
+        if(localDateTime.isAfter(test.getEnd_time())){
             //返回没有答案的（已实现）
             return questionService.getQuestionNoAnswerByTestID(testId);
         }else {
@@ -83,9 +88,17 @@ public class TestServiceImpl implements TestService {
     @Override
     public ResultVO<TestVO> submitAnswer(Integer studentID, Integer testID, String answer) {
         int res;
+        double score=0;
+        Test test;
+        test=testMapper.selectByPrimaryKey(testID);
+        List<CourseQuestionVO> QuestionList=questionService.getQuestionWithAnswerByTestID(testID);
+        double eachScore=(double)100/QuestionList.size();
+        for (int i=0;i<QuestionList.size();i++){
+            if (answer.substring(i, i + 1).equals(QuestionList.get(i).getCorrect_answer()))
+                score+=eachScore;
+        }
+        res=testResultMapper.insertResultList(testID,studentID,answer,score);
 
-        res=testResultMapper.insertResultList(testID,studentID,answer);
-        Test test=new Test();
         if(res<=0){
             return new ResultVO<>(Constant.REQUEST_FAIL,"服务器内部错误");
         }else {

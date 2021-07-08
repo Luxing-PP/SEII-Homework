@@ -17,4 +17,9 @@
         from test
         where course_id = #{courseId,jdbcType=INTEGER}
     </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select id, course_id, start_time, end_time, tname
+        from test
+        where id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>

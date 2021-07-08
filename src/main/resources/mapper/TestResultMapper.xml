@@ -4,8 +4,8 @@
     <insert id="insertResultList" useGeneratedKeys="false">
         insert into
             `test_result`
-            (test_id,user_id,user_answer)
+            (test_id,user_id,user_answer,user_score)
             VALUES
-                (#{test_id},#{student_id},#{answer})
+                (#{test_id},#{student_id},#{answer},#{score})
     </insert>
 </mapper>
