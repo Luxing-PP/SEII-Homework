@@ -26,4 +26,11 @@ public class TestVO {
     }
     public TestVO(){}
 
+    public List<Integer> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Integer> questionList) {
+        this.questionList = questionList;
+    }
 }
