@@ -61,6 +61,7 @@ class TestControllerTest {
     @Test
     void submitAnswer() {
         //todo 不知道咋测0 0
-        testController.submitAnswer(1,1,"ABC");
+        ResultVO<TestVO> resultVO=testController.submitAnswer(1,1,"ABC");
+        System.out.println(resultVO);
     }
 }

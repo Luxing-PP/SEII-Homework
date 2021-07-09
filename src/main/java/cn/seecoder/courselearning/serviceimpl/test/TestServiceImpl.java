@@ -5,12 +5,14 @@ import cn.seecoder.courselearning.mapperservice.test.TestQuestionMapper;
 import cn.seecoder.courselearning.mapperservice.test.TestResultMapper;
 import cn.seecoder.courselearning.po.course.CourseWare;
 import cn.seecoder.courselearning.po.test.Test;
+import cn.seecoder.courselearning.po.test.TestResult;
 import cn.seecoder.courselearning.service.Test.TestService;
 import cn.seecoder.courselearning.service.course.CourseQuestionService;
 import cn.seecoder.courselearning.util.Constant;
 import cn.seecoder.courselearning.vo.ResultVO;
 import cn.seecoder.courselearning.vo.course.CourseQuestionVO;
 import cn.seecoder.courselearning.vo.course.CourseWareVO;
+import cn.seecoder.courselearning.vo.test.TestResultVO;
 import cn.seecoder.courselearning.vo.test.TestVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,7 @@ public class TestServiceImpl implements TestService {
         Test test;
         test=testMapper.selectByPrimaryKey(testId);
         LocalDateTime localDateTime=LocalDateTime.now();
-        if(localDateTime.isAfter(test.getEnd_time())){
+        if(!localDateTime.isAfter(test.getEnd_time())){
             //返回没有答案的（已实现）
             return questionService.getQuestionNoAnswerByTestID(testId);
         }else {
@@ -105,5 +107,18 @@ public class TestServiceImpl implements TestService {
             return new ResultVO<>(Constant.REQUEST_SUCCESS,"提交成功！",new TestVO(test));
         }
 
+    }
+
+    @Override
+    public TestResultVO getTestResult(Integer studentID, Integer testID) {
+        Test test=testMapper.selectByPrimaryKey(testID);
+        LocalDateTime localDateTime=LocalDateTime.now();
+        if(localDateTime.isAfter(test.getEnd_time())){
+        TestResult testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
+        return new TestResultVO(testResult);
+        }
+        else {
+            return null;
+        }
     }
 }

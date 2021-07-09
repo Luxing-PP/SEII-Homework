@@ -5,6 +5,7 @@ import cn.seecoder.courselearning.po.test.Test;
 import cn.seecoder.courselearning.service.Test.TestService;
 import cn.seecoder.courselearning.vo.ResultVO;
 import cn.seecoder.courselearning.vo.course.CourseQuestionVO;
+import cn.seecoder.courselearning.vo.test.TestResultVO;
 import cn.seecoder.courselearning.vo.test.TestVO;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +42,11 @@ public class TestController {
                                          @RequestParam String answer){
         //todo 这个我就没搞懂HH
         return testService.submitAnswer(studentID,testID,answer);
+    }
+
+    @GetMapping("/getTestResult/{testID}/{studentID}")
+    public TestResultVO getTestResult(@PathVariable Integer studentID,
+                                      @PathVariable Integer testID){
+        return testService.getTestResult(studentID,testID);
     }
 }

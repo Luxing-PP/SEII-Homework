@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.seecoder.courselearning.mapperservice.test.TestResultMapper">
+    <resultMap id="BaseResultMap" type="cn.seecoder.courselearning.po.test.TestResult">
+        <id column="id" property="id"/>
+        <result column="test_id" property="test_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="user_answer" property="user_answer"/>
+        <result column="user_score" property="user_score"/>
+    </resultMap>
     <insert id="insertResultList" useGeneratedKeys="false">
         insert into
             `test_result`
@@ -8,4 +15,9 @@
             VALUES
                 (#{test_id},#{student_id},#{answer},#{score})
     </insert>
+    <select id="selectByTestIdAndStudentId" resultType="cn.seecoder.courselearning.po.test.TestResult">
+        select id,test_id,user_id,user_answer,user_score
+        from test_result
+        where  user_id=#{user_id} and test_id=#{test_id}
+    </select>
 </mapper>
