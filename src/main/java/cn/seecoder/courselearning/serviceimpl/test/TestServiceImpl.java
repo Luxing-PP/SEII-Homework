@@ -114,8 +114,8 @@ public class TestServiceImpl implements TestService {
         Test test=testMapper.selectByPrimaryKey(testID);
         LocalDateTime localDateTime=LocalDateTime.now();
         if(localDateTime.isAfter(test.getEnd_time())){
-        TestResult testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
-        return new TestResultVO(testResult);
+        List<TestResult> testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
+        return new TestResultVO(testResult.get(testResult.size()-1));
         }
         else {
             return null;
