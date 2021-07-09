@@ -62,9 +62,14 @@ class TestControllerTest {
     @Test
     void submitAnswer() {
         //todo 不知道咋测0 0
-//        ResultVO<TestVO> resultVO=testController.submitAnswer(1,1,"ABC");
-//        System.out.println(resultVO);
+        ResultVO<TestVO> resultVO=testController.submitAnswer(1,1,"ABC");
+        System.out.println(resultVO);
+
+    }
+    @Test
+    void getTestResult() {
         TestResultVO testResultVO=testController.getTestResult(1,1);
-        System.out.println(testResultVO);
+        assert (testResultVO.getUser_score()==50);
+        assert (testResultVO.getUser_answer().equals("ABC"));
     }
 }
