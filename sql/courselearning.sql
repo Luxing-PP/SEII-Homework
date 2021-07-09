@@ -1,3 +1,4 @@
+create database if not exists `courselearning` default charset utf8mb4;
 use `courselearning`;
 
 SET NAMES utf8mb4;
