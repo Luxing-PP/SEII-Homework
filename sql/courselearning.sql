@@ -1,3 +1,4 @@
+create database if not exists `courselearning` default charset utf8mb4;
 use `courselearning`;
 
 SET NAMES utf8mb4;
@@ -172,16 +173,20 @@ CREATE TABLE `course_question`(
     `course_id` BIGINT NOT NULL,
     `answer_id` BIGINT NOT NULL UNIQUE ,
     `description` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `optionA` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项A',
+    `optionB` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项B',
+    `optionC` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项C',
+    `optionD` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项D',
     PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course_question
 -- ----------------------------
-INSERT INTO `course_question` VALUES (1,1,1,'软工一默认测试的第一题');
-INSERT INTO `course_question` VALUES (2,1,2,'软工一默认测试的第二题');
-INSERT INTO `course_question` VALUES (3,2,3,'软工二默认测试的第一题');
-INSERT INTO `course_question` VALUES (4,2,4,'软工二默认测试的第二题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (1,1,1,'软工一默认测试的第一题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (2,1,2,'软工一默认测试的第二题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (3,2,3,'软工二默认测试的第一题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (4,2,4,'软工二默认测试的第二题');
 
 -- ----------------------------
 -- Table structure for question_answer
@@ -198,7 +203,7 @@ CREATE TABLE `question_answer`(
 -- ----------------------------
 -- Records of question_answer
 -- ----------------------------
-INSERT INTO `question_answer` VALUES (1,'软工一第一题答案','我咋知道咋做');
+INSERT INTO `question_answer` VALUES (1,'A','我咋知道咋做');
 INSERT INTO `question_answer` VALUES (2,'软工一第二题答案','我咋知道咋做');
 INSERT INTO `question_answer` VALUES (3,'软工二第一题答案','我咋知道咋做');
 INSERT INTO `question_answer` VALUES (4,'软工二第二题答案','我咋知道咋做');
@@ -213,14 +218,15 @@ CREATE TABLE `test` (
     `course_id` BIGINT NOT NULL ,
     `start_time` datetime(0) NULL DEFAULT NULL,
     `end_time`   datetime(0) NULL DEFAULT NULL,
+    `tname` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
     PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of test
 -- ----------------------------
-INSERT INTO `test` VALUES (1,1,'2021-06-13 10:00:00','2020-08-31 10:00:00'); #对应软工一的测试
-INSERT INTO `test` VALUES (2,2,'2021-06-13 10:00:00','2020-08-31 10:00:00'); #对应软工二的测试
+INSERT INTO `test` VALUES (1,1,'2021-06-13 10:00:00','2020-08-31 10:00:00','first-test'); #对应软工一的测试
+INSERT INTO `test` VALUES (2,2,'2021-06-13 10:00:00','2020-08-31 10:00:00','second-test'); #对应软工二的测试
 
 
 -- ----------------------------
@@ -248,9 +254,10 @@ INSERT INTO `test_question` (id, question_id, test_id) VALUES (4,4,2);
 DROP TABLE IF EXISTS `test_result`;
 CREATE TABLE `test_result`(
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `user_id` BIGINT NOT NULL,
   `test_id` BIGINT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   `user_answer` VARCHAR(255)  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_score` DOUBLE,
   PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 

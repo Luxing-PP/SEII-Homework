@@ -14,8 +14,10 @@ public class TestVO {
     private List<Integer> questionList;
     private LocalDateTime start_time;
     private LocalDateTime end_time;
+    private String tname;
 
     public TestVO(Test test){
+        this.tname=test.getTname();
         this.id = test.getId();
         this.course_id = test.getCourse_id();
         this.questionList = test.getQuestionList();
@@ -24,4 +26,11 @@ public class TestVO {
     }
     public TestVO(){}
 
+    public List<Integer> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Integer> questionList) {
+        this.questionList = questionList;
+    }
 }

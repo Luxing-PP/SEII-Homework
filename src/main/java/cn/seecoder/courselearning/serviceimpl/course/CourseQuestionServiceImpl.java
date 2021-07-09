@@ -31,7 +31,10 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         int resA = questionAnswerMapper.insert(questionAnswer);
 
         // 2.用获取的答案ID构建courseQuestion , 进行存储
-        CourseQuestion courseQuestion = new CourseQuestion(courseQuestionVO.getCourse_id(),questionAnswer.getId(),courseQuestionVO.getDescription());
+        CourseQuestion courseQuestion = new CourseQuestion(
+                courseQuestionVO.getCourse_id(),questionAnswer.getId(),courseQuestionVO.getDescription(),
+                courseQuestionVO.getOptionA(),courseQuestionVO.getOptionB(),courseQuestionVO.getOptionC(),courseQuestionVO.getOptionD()
+        );
         int resB = courseQuestionMapper.insert(courseQuestion);
 
         if(resA>0&&resB>0){
@@ -58,6 +61,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         for(CourseQuestion courseQuestion: tempList){
             ret.add(new CourseQuestionVO(courseQuestion));
         }
+        ret=sort(ret);
         return ret;
     }
 
@@ -68,6 +72,20 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         for(CourseQuestion courseQuestion: tempList){
             ret.add(new CourseQuestionVO(courseQuestion));
         }
+        ret=sort(ret);
         return ret;
+    }
+//按qid排序
+    private List<CourseQuestionVO> sort(List<CourseQuestionVO> list){
+        for (int i=0;i<list.size()-1;i++){
+            for (int j=0;j<list.size()-i-1;j++){
+                if (list.get(j).getId()>list.get(j+1).getId()){
+                    CourseQuestionVO temp=list.get(j);
+                    list.set(j,list.get(j+1));
+                    list.set(j+1,temp);
+                }
+            }
+        }
+        return list;
     }
 }

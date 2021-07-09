@@ -2,18 +2,25 @@ package cn.seecoder.courselearning.serviceimpl.test;
 
 import cn.seecoder.courselearning.mapperservice.test.TestMapper;
 import cn.seecoder.courselearning.mapperservice.test.TestQuestionMapper;
+import cn.seecoder.courselearning.mapperservice.test.TestResultMapper;
+import cn.seecoder.courselearning.po.course.CourseWare;
 import cn.seecoder.courselearning.po.test.Test;
+import cn.seecoder.courselearning.po.test.TestResult;
 import cn.seecoder.courselearning.service.Test.TestService;
 import cn.seecoder.courselearning.service.course.CourseQuestionService;
 import cn.seecoder.courselearning.util.Constant;
 import cn.seecoder.courselearning.vo.ResultVO;
 import cn.seecoder.courselearning.vo.course.CourseQuestionVO;
+import cn.seecoder.courselearning.vo.course.CourseWareVO;
+import cn.seecoder.courselearning.vo.test.TestResultVO;
 import cn.seecoder.courselearning.vo.test.TestVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +29,9 @@ public class TestServiceImpl implements TestService {
     private TestMapper testMapper;
     @Resource
     private TestQuestionMapper testQuestionMapper;
-
+    @Resource
+    private TestResultMapper testResultMapper;
+    @Resource
     private CourseQuestionService questionService;
 
     @Autowired
@@ -33,7 +42,11 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<CourseQuestionVO> getAllQuestionByTestId(Integer testId) {
         //todo 怎么决定返回哪个你们决定叭，实现反正都实现了
-        if(true){
+        //比较当前时间是否已结束测试
+        Test test;
+        test=testMapper.selectByPrimaryKey(testId);
+        LocalDateTime localDateTime=LocalDateTime.now();
+        if(!localDateTime.isAfter(test.getEnd_time())){
             //返回没有答案的（已实现）
             return questionService.getQuestionNoAnswerByTestID(testId);
         }else {
@@ -60,6 +73,52 @@ public class TestServiceImpl implements TestService {
             return new ResultVO<>(Constant.REQUEST_FAIL,"服务器内部错误");
         }else {
             return new ResultVO<>(Constant.REQUEST_SUCCESS,"创建测试成功！",new TestVO(test));
+        }
+    }
+
+    @Override
+    public List<TestVO> getAllTest(Integer courseId) {
+        Test test=new Test();
+        List<Test> tempList = testMapper.selectByCourseId(courseId);
+        List<TestVO> ret = new ArrayList<>();
+        for(Test test1: tempList){
+            ret.add(new TestVO(test1));
+        }
+        return ret;
+    }
+
+    @Override
+    public ResultVO<TestVO> submitAnswer(Integer studentID, Integer testID, String answer) {
+        int res;
+        double score=0;
+        Test test;
+        test=testMapper.selectByPrimaryKey(testID);
+        List<CourseQuestionVO> QuestionList=questionService.getQuestionWithAnswerByTestID(testID);
+        double eachScore=(double)100/QuestionList.size();
+        for (int i=0;i<QuestionList.size();i++){
+            if (answer.substring(i, i + 1).equals(QuestionList.get(i).getCorrect_answer()))
+                score+=eachScore;
+        }
+        res=testResultMapper.insertResultList(testID,studentID,answer,score);
+
+        if(res<=0){
+            return new ResultVO<>(Constant.REQUEST_FAIL,"服务器内部错误");
+        }else {
+            return new ResultVO<>(Constant.REQUEST_SUCCESS,"提交成功！",new TestVO(test));
+        }
+
+    }
+
+    @Override
+    public TestResultVO getTestResult(Integer studentID, Integer testID) {
+        Test test=testMapper.selectByPrimaryKey(testID);
+        LocalDateTime localDateTime=LocalDateTime.now();
+        if(localDateTime.isAfter(test.getEnd_time())){
+        List<TestResult> testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
+        return new TestResultVO(testResult.get(testResult.size()-1));
+        }
+        else {
+            return null;
         }
     }
 }
