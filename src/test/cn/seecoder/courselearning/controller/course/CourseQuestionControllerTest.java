@@ -29,6 +29,10 @@ class CourseQuestionControllerTest {
         item.setCourse_id(1);
         item.setExplain("啊啊阿巴巴解析");
         item.setDescription("呆滞测试用问题");
+        item.setOptionA("测试用选项A");
+        item.setOptionB("测试用选项B");
+        item.setOptionC("测试用选项C");
+        item.setOptionD("测试用选项D");
 
         ResultVO<CourseQuestionVO> res = courseQuestionController.createQuestion(item);
 

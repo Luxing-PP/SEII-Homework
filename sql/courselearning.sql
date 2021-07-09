@@ -172,16 +172,20 @@ CREATE TABLE `course_question`(
     `course_id` BIGINT NOT NULL,
     `answer_id` BIGINT NOT NULL UNIQUE ,
     `description` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `optionA` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项A',
+    `optionB` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项B',
+    `optionC` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项C',
+    `optionD` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '选项D',
     PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course_question
 -- ----------------------------
-INSERT INTO `course_question` VALUES (1,1,1,'软工一默认测试的第一题');
-INSERT INTO `course_question` VALUES (2,1,2,'软工一默认测试的第二题');
-INSERT INTO `course_question` VALUES (3,2,3,'软工二默认测试的第一题');
-INSERT INTO `course_question` VALUES (4,2,4,'软工二默认测试的第二题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (1,1,1,'软工一默认测试的第一题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (2,1,2,'软工一默认测试的第二题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (3,2,3,'软工二默认测试的第一题');
+INSERT INTO `course_question` (id,course_id,answer_id,description) VALUES (4,2,4,'软工二默认测试的第二题');
 
 -- ----------------------------
 -- Table structure for question_answer
