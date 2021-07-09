@@ -49,11 +49,5 @@ public class TestResult {
     public void setUser_score(Double user_score) {
         this.user_score = user_score;
     }
-    public TestResult(@NonNull TestResultVO testResultVO){
-        id=testResultVO.getId();
-        test_id=testResultVO.getTest_id();
-        user_id=testResultVO.getUser_id();
-        user_answer=testResultVO.getUser_answer();
-        user_score=testResultVO.getUser_score();
-    }
+
 }

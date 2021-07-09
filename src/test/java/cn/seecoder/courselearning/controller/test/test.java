@@ -1,6 +1,7 @@
 package cn.seecoder.courselearning.controller.test;
 import cn.seecoder.courselearning.vo.ResultVO;
 import cn.seecoder.courselearning.vo.course.CourseQuestionVO;
+import cn.seecoder.courselearning.vo.test.TestResultVO;
 import cn.seecoder.courselearning.vo.test.TestVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,7 +62,9 @@ class TestControllerTest {
     @Test
     void submitAnswer() {
         //todo 不知道咋测0 0
-        ResultVO<TestVO> resultVO=testController.submitAnswer(1,1,"ABC");
-        System.out.println(resultVO);
+//        ResultVO<TestVO> resultVO=testController.submitAnswer(1,1,"ABC");
+//        System.out.println(resultVO);
+        TestResultVO testResultVO=testController.getTestResult(1,1);
+        System.out.println(testResultVO);
     }
 }

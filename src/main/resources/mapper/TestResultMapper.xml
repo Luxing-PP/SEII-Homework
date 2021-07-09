@@ -15,7 +15,7 @@
             VALUES
                 (#{test_id},#{student_id},#{answer},#{score})
     </insert>
-    <select id="selectByTestIdAndStudentId" resultType="cn.seecoder.courselearning.po.test.TestResult">
+    <select id="selectByTestIdAndStudentId" resultMap="BaseResultMap">
         select id,test_id,user_id,user_answer,user_score
         from test_result
         where  user_id=#{user_id} and test_id=#{test_id}
