@@ -17,10 +17,11 @@ public class CourseRentServiceImpl implements CourseRentService {
     public Integer isRent(Integer student_id, Integer course_id) {
         List<CourseRent> courseRent=courseRentMapper.selectByStudentIdandCourseId(student_id,course_id);
         if (courseRent.size()>=1) {
-            if (courseRent.get(0).getEnd_time().isAfter(LocalDateTime.now()))
-                return 1;
-            else
-                return 0;
+            for (CourseRent rent : courseRent) {
+                if (rent.getEnd_time().isAfter(LocalDateTime.now()))
+                    return 1;
+            }
+            return 0;
         }
         else
             return 0;
