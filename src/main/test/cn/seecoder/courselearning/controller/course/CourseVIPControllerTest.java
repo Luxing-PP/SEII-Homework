@@ -14,8 +14,9 @@ class CourseVIPControllerTest {
     @Test
     void isVip() {
         System.out.println(courseVIPController.isVip(1));
-        assert (courseVIPController.isVip(1)==1);
+
+        assert (courseVIPController.isVip(1).getIsVip()==1);
         System.out.println(courseVIPController.isVip(2));
-        assert (courseVIPController.isVip(2)==0);
+        assert (courseVIPController.isVip(2).getIsVip()==0);
     }
 }

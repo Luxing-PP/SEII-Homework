@@ -2,6 +2,7 @@ package cn.seecoder.courselearning.controller.course;
 
 import cn.seecoder.courselearning.service.course.CourseRentService;
 import cn.seecoder.courselearning.service.user.VipService;
+import cn.seecoder.courselearning.vo.user.VipResultVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class CourseVIPController {
 
 
     @GetMapping("/isVip/{student_id}")
-    public Integer isVip(@PathVariable Integer student_id){
+    public VipResultVO isVip(@PathVariable Integer student_id){
         System.out.println("ISvip:"+student_id);
         return vipService.isVip(student_id);
     }
