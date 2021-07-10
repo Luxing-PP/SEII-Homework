@@ -26,7 +26,10 @@ public class CourseOrderController {
     public ResultVO<CourseOrderVO> createCourseOrder(@RequestParam Integer uid, @RequestParam Integer courseId){
         return orderService.createCourseOrder(courseId,uid);
     }
-
+    @PostMapping("/create/rent")
+    public ResultVO<CourseOrderVO> createRentCourseOrder(@RequestParam Integer courseId,@RequestParam Integer uid){
+        return orderService.createRentCourseOrder(courseId,uid);
+    }
     /**
      * 根据uid查询用户所有的订单
      */

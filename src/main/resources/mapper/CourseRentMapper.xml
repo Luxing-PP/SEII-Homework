@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seecoder.courselearning.mapperservice.course.CourseRentMapper">
+    <resultMap id="BaseResultMap" type="cn.seecoder.courselearning.po.course.CourseRent">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="course_id" jdbcType="INTEGER" property="course_id" />
+        <result column="student_id" jdbcType="INTEGER" property="student_id" />
+        <result column="start_time"  property="start_time" />
+        <result column="end_time"  property="end_time" />
+    </resultMap>
+    <insert id="insert">
+        insert into course_rent(id,course_id,student_id,start_time,end_time)
+        VALUES (#{id,jdbcType=BIGINT},#{course_id,jdbcType=BIGINT},#{student_id,jdbcType=BIGINT},
+                #{start_time},#{end_time})
+    </insert>
+
+</mapper>
