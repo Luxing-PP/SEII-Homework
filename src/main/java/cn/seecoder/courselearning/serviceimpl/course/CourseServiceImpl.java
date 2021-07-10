@@ -128,7 +128,7 @@ public class CourseServiceImpl implements CourseService {
             List<CourseVO> voList = result.getList();
             for(CourseVO vo: voList){
                 CourseOrder order = orderService.queryMostRecentOrder(uid, vo.getId());
-                if(order != null)
+                if(order != null&&(!order.getCourseName().startsWith("租用：")))
                     vo.setBought(order.getStatus().equals(Constant.ORDER_STATUS_SUCCESS));
                 vo.setManageable(uid.equals(vo.getTeacherId()));
             }

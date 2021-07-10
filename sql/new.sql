@@ -11,6 +11,10 @@ CREATE TABLE `course_rent`(
                                   `end_time`   datetime(0) NULL DEFAULT NULL,
                                   PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB  CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `course_rent` VALUES (1,3,1,'2021-7-8 10:00:00','2021-8-8 10:00:00');
 
 -- ----------------------------
 -- Table structure for vip
