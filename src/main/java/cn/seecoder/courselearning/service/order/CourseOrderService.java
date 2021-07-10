@@ -22,4 +22,8 @@ public interface CourseOrderService {
     ResultVO<Boolean> payOrder(Integer orderId);
     // 创建订单
     ResultVO<CourseOrderVO> createCourseOrder(Integer courseId, Integer userId);
+
+    ResultVO<CourseOrderVO> createRentCourseOrder(Integer courseId, Integer userId);
+
+    ResultVO<CourseOrderVO> createVipOrder(Integer studentId);
 }
