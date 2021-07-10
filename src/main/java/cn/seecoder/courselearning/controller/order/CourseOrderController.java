@@ -30,8 +30,8 @@ public class CourseOrderController {
     public ResultVO<CourseOrderVO> createRentCourseOrder(@RequestParam Integer courseId,@RequestParam Integer uid){
         return orderService.createRentCourseOrder(courseId,uid);
     }
-    @PostMapping("/create/vip")
-    public ResultVO<CourseOrderVO> createVipOrder(@RequestParam Integer studentId){
+    @PostMapping("/create/vip/{studentId}")
+    public ResultVO<CourseOrderVO> createVipOrder(@PathVariable Integer studentId){
         return orderService.createVipOrder(studentId);
     }
     /**

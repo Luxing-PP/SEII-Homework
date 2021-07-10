@@ -15,7 +15,7 @@ public class CourseRentController {
     CourseRentService courseRentService;
 
 
-    @GetMapping("/student/hasrent/{studentid}/{courseId}")
+    @GetMapping("/hasrent/{studentid}/{courseId}")
     public Integer HasRentCourse(@PathVariable Integer studentid,@PathVariable Integer courseId){
         return courseRentService.isRent(studentid,courseId);
     }
