@@ -17,6 +17,7 @@ public class CourseVIPController {
 
     @GetMapping("/isVip/{student_id}")
     public Integer isVip(@PathVariable Integer student_id){
+        System.out.println("ISvip:"+student_id);
         return vipService.isVip(student_id);
     }
 
