@@ -115,7 +115,9 @@ public class TestServiceImpl implements TestService {
         LocalDateTime localDateTime=LocalDateTime.now();
         if(localDateTime.isAfter(test.getEnd_time())){
         List<TestResult> testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
+        if(testResult.size() != 0)
         return new TestResultVO(testResult.get(testResult.size()-1));
+        return new TestResultVO();
         }
         else {
             return null;

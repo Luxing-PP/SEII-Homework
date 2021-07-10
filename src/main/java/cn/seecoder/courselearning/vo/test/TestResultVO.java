@@ -18,4 +18,6 @@ public class TestResultVO {
         user_answer=testResult.getUser_answer();
         user_score=testResult.getUser_score();
     }
+    public TestResultVO(){
+    }
 }
