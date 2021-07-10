@@ -1,4 +1,4 @@
-package cn.seecoder.courselearning.mapperservice.user;
+package cn.seecoder.courselearning.po.user;
 
 import java.time.LocalDateTime;
 
