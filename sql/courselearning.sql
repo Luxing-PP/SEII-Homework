@@ -48,6 +48,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 INSERT INTO `course` VALUES (1, '软件工程与计算 I', '中级', '通过Scheme、Python和Java语言，让你分别体会函数式编程范式、结构化编程范式和面向对象编程范式', 'course1.png', '南京大学', '2020-12-20 10:00:00', NULL, 1, 100, '刘钦');
 INSERT INTO `course` VALUES (2, '软件工程与计算 II', '中级', '基于DevOps培养团队开发中小规模软件系统的能力', 'course2.png', '南京大学', '2020-12-20 10:00:00', NULL, 1, 200, '刘钦');
+INSERT INTO `course` VALUES (-1, 'vip', '中级', '', '', '', '2020-12-20 10:00:00', NULL, 0, 0, '0');#为了创建vip订单弄的特殊course
 
 -- ----------------------------
 -- Table structure for course_likes

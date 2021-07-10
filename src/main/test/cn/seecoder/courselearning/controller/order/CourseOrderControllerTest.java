@@ -20,4 +20,9 @@ class CourseOrderControllerTest {
         courseOrderController.createRentCourseOrder(1,1);
         courseOrderController.payOrder(1);
     }
+    @Test
+    void vipOrder(){
+        courseOrderController.createVipOrder(1);
+        courseOrderController.payOrder(1);
+    }
 }

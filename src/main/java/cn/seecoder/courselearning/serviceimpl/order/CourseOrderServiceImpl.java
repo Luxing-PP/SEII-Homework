@@ -3,12 +3,14 @@ package cn.seecoder.courselearning.serviceimpl.order;
 import cn.seecoder.courselearning.mapperservice.coupon.CourseOrderCouponMapper;
 import cn.seecoder.courselearning.mapperservice.course.CourseRentMapper;
 import cn.seecoder.courselearning.mapperservice.order.CourseOrderMapper;
+import cn.seecoder.courselearning.mapperservice.user.VipMapper;
 import cn.seecoder.courselearning.po.coupon.Coupon;
 import cn.seecoder.courselearning.po.coupon.CourseOrderCoupon;
 import cn.seecoder.courselearning.po.coupon.UserCoupon;
 import cn.seecoder.courselearning.po.course.Course;
 import cn.seecoder.courselearning.po.course.CourseRent;
 import cn.seecoder.courselearning.po.order.CourseOrder;
+import cn.seecoder.courselearning.po.user.Vip;
 import cn.seecoder.courselearning.service.coupon.CouponService;
 import cn.seecoder.courselearning.service.course.CourseService;
 import cn.seecoder.courselearning.service.order.CourseOrderService;
@@ -38,6 +40,8 @@ public class CourseOrderServiceImpl implements CourseOrderService {
     CourseRentMapper courseRentMapper;
     @Resource
     CourseOrderCouponMapper courseOrderCouponMapper;
+    @Resource
+    VipMapper vipMapper;
 
     UserService userService;
 
@@ -209,7 +213,14 @@ public class CourseOrderServiceImpl implements CourseOrderService {
                     courseRent.setStart_time(LocalDateTime.now());
                     courseRent.setEnd__time(LocalDateTime.now().plus(1, ChronoUnit.MONTHS));
                     courseRentMapper.insert(courseRent);
-                }
+                }//recent
+                if(order.getCourseName().equals("VIP")){
+                    Vip vip=new Vip();
+                    vip.setStudent_id(order.getUserId());
+                    vip.setStart_time(LocalDateTime.now());
+                    vip.setEnd_time(LocalDateTime.now().plus(1, ChronoUnit.MONTHS));
+                    vipMapper.insert(vip);
+                }//vip
                 return new ResultVO<>(Constant.REQUEST_SUCCESS,"付款成功");
             }else{
                 return new ResultVO<>(Constant.REQUEST_FAIL,resultVO.getMsg());
@@ -317,43 +328,23 @@ public class CourseOrderServiceImpl implements CourseOrderService {
 
     @Override
     public ResultVO<CourseOrderVO> createVipOrder(Integer studentId) {
-        return null;
-//        List<CourseOrder> courseOrderList = orderMapper.selectByUserId(userId);
-//
-//        for(CourseOrder order: courseOrderList){
-//            if(order.getCourseId().equals(courseId)){
-//                if(order.getStatus() == Constant.ORDER_STATUS_SUCCESS){
-//                    return new ResultVO<>(Constant.REQUEST_FAIL,"已购买该课程");
-//
-//                }
-//                List<Coupon> usedCoupons = couponService.getByOrderId(order.getId());
-//                List<CouponVO> couponVOS = new ArrayList<>();
-//                for(Coupon coupon:usedCoupons){
-//                    couponVOS.add(new CouponVO(coupon));
-//                }
-//                CourseOrderVO courseOrderVO = new CourseOrderVO(order);
-//                courseOrderVO.setUsedCoupons(couponVOS);
-//                return new ResultVO<>(Constant.REQUEST_SUCCESS,"恢复到未完成订单", courseOrderVO);
-//            }
-//        }
-//        CourseOrder order = new CourseOrder();
-//
-//        order.setUserId(userId);
-//        order.setCourseId(courseId);
-//        CourseVO courseVO = courseService.getCourse(courseId,userId);
-//        order.setCost(courseVO.getCost());
-//        order.setStatus(Constant.ORDER_STATUS_UNPAID);
-//        order.setCreateTime(new Date());
-//        order.setCourseName(courseVO.getName());
-//        order.setOrigin(courseVO.getCost());
-//
-//        if(orderMapper.insert(order) != 1){
-//            return new ResultVO<>(Constant.REQUEST_FAIL,"创建失败",null);
-//        }
-//
-//        CourseOrderVO courseOrderVO = new CourseOrderVO(order);
-//
-//        return new ResultVO<>(Constant.REQUEST_SUCCESS,"创建成功",courseOrderVO);
+        CourseOrder order = new CourseOrder();
+        order.setUserId(studentId);
+        order.setCourseId(-1);
+        //CourseVO courseVO = courseService.getCourse(-1,studentId);
+        order.setOrigin(10);
+        order.setCost(10);
+        order.setStatus(Constant.ORDER_STATUS_UNPAID);
+        order.setCreateTime(new Date());
+        order.setCourseName("VIP");
+
+        if(orderMapper.insert(order) != 1){
+            return new ResultVO<>(Constant.REQUEST_FAIL,"创建失败",null);
+        }
+
+        CourseOrderVO courseOrderVO = new CourseOrderVO(order);
+
+        return new ResultVO<>(Constant.REQUEST_SUCCESS,"创建成功",courseOrderVO);
     }
 
 
