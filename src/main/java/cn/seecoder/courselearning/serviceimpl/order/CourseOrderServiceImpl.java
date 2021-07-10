@@ -311,7 +311,7 @@ public class CourseOrderServiceImpl implements CourseOrderService {
         order.setUserId(userId);
         order.setCourseId(courseId);
         CourseVO courseVO = courseService.getCourse(courseId,userId);
-        order.setCost((int) (courseVO.getCost()*0.2));//租用用20%
+        order.setCost(1);//租用1块
         order.setStatus(Constant.ORDER_STATUS_UNPAID);
         order.setCreateTime(new Date());
         order.setCourseName("租用："+courseVO.getName());
