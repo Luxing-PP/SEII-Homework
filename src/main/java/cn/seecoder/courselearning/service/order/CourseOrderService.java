@@ -24,4 +24,6 @@ public interface CourseOrderService {
     ResultVO<CourseOrderVO> createCourseOrder(Integer courseId, Integer userId);
 
     ResultVO<CourseOrderVO> createRentCourseOrder(Integer courseId, Integer userId);
+
+    ResultVO<CourseOrderVO> createVipOrder(Integer studentId);
 }

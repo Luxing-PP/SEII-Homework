@@ -270,20 +270,29 @@ public class CourseOrderServiceImpl implements CourseOrderService {
     @Override
     public ResultVO<CourseOrderVO> createRentCourseOrder(Integer courseId, Integer userId) {
         List<CourseOrder> courseOrderList = orderMapper.selectByUserId(userId);
-
+        boolean flag=true;
         for(CourseOrder order: courseOrderList){
             if(order.getCourseId().equals(courseId)){
-                if(order.getStatus() == Constant.ORDER_STATUS_SUCCESS){
-                    return new ResultVO<>(Constant.REQUEST_FAIL,"已购买该课程");
+                List<CourseRent> temp=courseRentMapper.selectByStudentIdandCourseId(userId,courseId);
+                for (CourseRent a:temp) {
+                    if(a.getEnd_time().isAfter(LocalDateTime.now())) {
+                        flag = false;
+                        break;
+                    }
                 }
-                List<Coupon> usedCoupons = couponService.getByOrderId(order.getId());
-                List<CouponVO> couponVOS = new ArrayList<>();
-                for(Coupon coupon:usedCoupons){
-                    couponVOS.add(new CouponVO(coupon));
+                if (flag) {
+                    if (order.getStatus() == Constant.ORDER_STATUS_SUCCESS) {
+                        return new ResultVO<>(Constant.REQUEST_FAIL, "已购买该课程");
+                    }
+                    List<Coupon> usedCoupons = couponService.getByOrderId(order.getId());
+                    List<CouponVO> couponVOS = new ArrayList<>();
+                    for (Coupon coupon : usedCoupons) {
+                        couponVOS.add(new CouponVO(coupon));
+                    }
+                    CourseOrderVO courseOrderVO = new CourseOrderVO(order);
+                    courseOrderVO.setUsedCoupons(couponVOS);
+                    return new ResultVO<>(Constant.REQUEST_SUCCESS, "恢复到未完成订单", courseOrderVO);
                 }
-                CourseOrderVO courseOrderVO = new CourseOrderVO(order);
-                courseOrderVO.setUsedCoupons(couponVOS);
-                return new ResultVO<>(Constant.REQUEST_SUCCESS,"恢复到未完成订单", courseOrderVO);
             }
         }
         CourseOrder order = new CourseOrder();
@@ -304,6 +313,47 @@ public class CourseOrderServiceImpl implements CourseOrderService {
         CourseOrderVO courseOrderVO = new CourseOrderVO(order);
 
         return new ResultVO<>(Constant.REQUEST_SUCCESS,"创建成功",courseOrderVO);
+    }
+
+    @Override
+    public ResultVO<CourseOrderVO> createVipOrder(Integer studentId) {
+        return null;
+//        List<CourseOrder> courseOrderList = orderMapper.selectByUserId(userId);
+//
+//        for(CourseOrder order: courseOrderList){
+//            if(order.getCourseId().equals(courseId)){
+//                if(order.getStatus() == Constant.ORDER_STATUS_SUCCESS){
+//                    return new ResultVO<>(Constant.REQUEST_FAIL,"已购买该课程");
+//
+//                }
+//                List<Coupon> usedCoupons = couponService.getByOrderId(order.getId());
+//                List<CouponVO> couponVOS = new ArrayList<>();
+//                for(Coupon coupon:usedCoupons){
+//                    couponVOS.add(new CouponVO(coupon));
+//                }
+//                CourseOrderVO courseOrderVO = new CourseOrderVO(order);
+//                courseOrderVO.setUsedCoupons(couponVOS);
+//                return new ResultVO<>(Constant.REQUEST_SUCCESS,"恢复到未完成订单", courseOrderVO);
+//            }
+//        }
+//        CourseOrder order = new CourseOrder();
+//
+//        order.setUserId(userId);
+//        order.setCourseId(courseId);
+//        CourseVO courseVO = courseService.getCourse(courseId,userId);
+//        order.setCost(courseVO.getCost());
+//        order.setStatus(Constant.ORDER_STATUS_UNPAID);
+//        order.setCreateTime(new Date());
+//        order.setCourseName(courseVO.getName());
+//        order.setOrigin(courseVO.getCost());
+//
+//        if(orderMapper.insert(order) != 1){
+//            return new ResultVO<>(Constant.REQUEST_FAIL,"创建失败",null);
+//        }
+//
+//        CourseOrderVO courseOrderVO = new CourseOrderVO(order);
+//
+//        return new ResultVO<>(Constant.REQUEST_SUCCESS,"创建成功",courseOrderVO);
     }
 
 
