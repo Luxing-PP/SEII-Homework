@@ -1,6 +1,7 @@
 package cn.seecoder.courselearning.controller.course;
 
 import cn.seecoder.courselearning.service.course.CourseRentService;
+import cn.seecoder.courselearning.service.user.VipService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +11,13 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/student")
 public class CourseVIPController {
-//    @Resource
-//    CourseRentService courseRentService;
+    @Resource
+    VipService vipService;
 
 
-//    @GetMapping("/buyVip/{student_id}")
-//    public Integer BuyVip(@PathVariable Integer student_id){
-//        return null;
-//    }
+    @GetMapping("/isVip/{student_id}")
+    public Integer isVip(@PathVariable Integer student_id){
+        return vipService.isVip(student_id);
+    }
 
 }

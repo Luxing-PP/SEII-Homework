@@ -12,5 +12,10 @@
         VALUES (#{id,jdbcType=BIGINT},#{student_id,jdbcType=BIGINT},
                 #{start_time},#{end_time})
     </insert>
+    <select id="selectByStudent_id" resultMap="BaseResultMap">
+        select id,student_id,start_time,end_time
+        from vip
+        where student_id=#{student_id}
+    </select>
 
 </mapper>

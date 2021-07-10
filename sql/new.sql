@@ -27,3 +27,7 @@ CREATE TABLE `vip`(
                                   `end_time`   datetime(0) NULL DEFAULT NULL,
                                   PRIMARY KEY (`id`) USING BTREE
 )ENGINE = InnoDB  CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `vip` VALUES (1,1,'2021-7-8 10:00:00','2021-8-8 10:00:00');
