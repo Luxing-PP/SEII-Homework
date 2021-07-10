@@ -22,7 +22,7 @@ class CourseOrderControllerTest {
     }
     @Test
     void vipOrder(){
-        courseOrderController.createVipOrder(1);
-        courseOrderController.payOrder(1);
+        courseOrderController.createVipOrder(2);
+        System.out.println(courseOrderController.payOrder(1));
     }
 }
