@@ -1,6 +1,6 @@
 package cn.seecoder.courselearning.vo.user;
 
-import cn.seecoder.courselearning.mapperservice.user.VIPResult;
+import cn.seecoder.courselearning.po.user.VIPResult;
 import lombok.Data;
 
 import java.time.LocalDateTime;

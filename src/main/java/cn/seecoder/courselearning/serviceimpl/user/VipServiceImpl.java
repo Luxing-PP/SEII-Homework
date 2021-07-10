@@ -1,6 +1,6 @@
 package cn.seecoder.courselearning.serviceimpl.user;
 
-import cn.seecoder.courselearning.mapperservice.user.VIPResult;
+import cn.seecoder.courselearning.po.user.VIPResult;
 import cn.seecoder.courselearning.mapperservice.user.VipMapper;
 import cn.seecoder.courselearning.po.user.Vip;
 import cn.seecoder.courselearning.service.user.VipService;
