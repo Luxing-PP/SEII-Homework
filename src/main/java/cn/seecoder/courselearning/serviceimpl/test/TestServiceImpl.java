@@ -45,8 +45,14 @@ public class TestServiceImpl implements TestService {
         //比较当前时间是否已结束测试
         Test test;
         test=testMapper.selectByPrimaryKey(testId);
-        return questionService.getQuestionWithAnswerByTestID(testId);
-
+        LocalDateTime localDateTime=LocalDateTime.now();
+        if(!localDateTime.isAfter(test.getEnd_time())){
+            //返回没有答案的（已实现）
+            return questionService.getQuestionNoAnswerByTestID(testId);
+        }else {
+            //返回带答案的
+            return questionService.getQuestionWithAnswerByTestID(testId);
+        }
     }
 
     @Override
