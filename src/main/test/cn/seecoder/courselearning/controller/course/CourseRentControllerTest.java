@@ -14,9 +14,9 @@ class CourseRentControllerTest {
     public void before(@Autowired CourseRentController courseRentController){ this.courseRentController = courseRentController; }
     @Test
     void createRentCourseOrder() {
-        System.out.println(courseRentController.HasRentCourse(1,3));
-        System.out.println(courseRentController.HasRentCourse(1,1));
-        System.out.println(courseRentController.HasRentCourse(1,2));
+//        System.out.println(courseRentController.HasRentCourse(1,3));
+//        System.out.println(courseRentController.HasRentCourse(1,1));
+//        System.out.println(courseRentController.HasRentCourse(1,2));
         assert (courseRentController.HasRentCourse(1,3)==1);
         assert (courseRentController.HasRentCourse(1,1)==0);
         assert (courseRentController.HasRentCourse(1,2)==0);
