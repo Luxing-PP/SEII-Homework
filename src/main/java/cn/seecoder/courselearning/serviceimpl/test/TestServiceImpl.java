@@ -113,6 +113,7 @@ public class TestServiceImpl implements TestService {
     public TestResultVO getTestResult(Integer studentID, Integer testID) {
         Test test=testMapper.selectByPrimaryKey(testID);
         LocalDateTime localDateTime=LocalDateTime.now();
+        System.out.println(localDateTime);
         if(localDateTime.isAfter(test.getEnd_time())){
         List<TestResult> testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
         if(testResult.size() != 0)
@@ -120,7 +121,7 @@ public class TestServiceImpl implements TestService {
         return new TestResultVO();
         }
         else {
-            return null;
+            return new TestResultVO();
         }
     }
 }
