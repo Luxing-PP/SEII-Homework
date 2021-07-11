@@ -295,13 +295,9 @@ public class CourseOrderServiceImpl implements CourseOrderService {
                     if (order.getStatus() == Constant.ORDER_STATUS_SUCCESS) {
                         return new ResultVO<>(Constant.REQUEST_FAIL, "已购买该课程");
                     }
-                    List<Coupon> usedCoupons = couponService.getByOrderId(order.getId());
-                    List<CouponVO> couponVOS = new ArrayList<>();
-                    for (Coupon coupon : usedCoupons) {
-                        couponVOS.add(new CouponVO(coupon));
-                    }
+
                     CourseOrderVO courseOrderVO = new CourseOrderVO(order);
-                    courseOrderVO.setUsedCoupons(couponVOS);
+
                     return new ResultVO<>(Constant.REQUEST_SUCCESS, "恢复到未完成订单", courseOrderVO);
                 }
             }

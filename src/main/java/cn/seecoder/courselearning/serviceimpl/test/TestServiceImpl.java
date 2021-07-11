@@ -41,12 +41,11 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<CourseQuestionVO> getAllQuestionByTestId(Integer testId) {
-        //todo 怎么决定返回哪个你们决定叭，实现反正都实现了
         //比较当前时间是否已结束测试
         Test test;
         test=testMapper.selectByPrimaryKey(testId);
         LocalDateTime localDateTime=LocalDateTime.now();
-        if(!localDateTime.isAfter(test.getEnd_time())){
+        if(localDateTime.isBefore(test.getEnd_time())){
             //返回没有答案的（已实现）
             return questionService.getQuestionNoAnswerByTestID(testId);
         }else {
@@ -92,13 +91,17 @@ public class TestServiceImpl implements TestService {
         int res;
         double score=0;
         Test test;
+        //1. 获取对应测试问题的答案
         test=testMapper.selectByPrimaryKey(testID);
         List<CourseQuestionVO> QuestionList=questionService.getQuestionWithAnswerByTestID(testID);
+
+        //2. 判断正误
         double eachScore=(double)100/QuestionList.size();
         for (int i=0;i<QuestionList.size();i++){
             if (answer.substring(i, i + 1).equals(QuestionList.get(i).getCorrect_answer()))
                 score+=eachScore;
         }
+        //3. 保存测试结果
         res=testResultMapper.insertResultList(testID,studentID,answer,score);
 
         if(res<=0){

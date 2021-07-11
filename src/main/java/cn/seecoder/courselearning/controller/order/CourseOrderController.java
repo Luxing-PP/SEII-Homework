@@ -26,10 +26,18 @@ public class CourseOrderController {
     public ResultVO<CourseOrderVO> createCourseOrder(@RequestParam Integer uid, @RequestParam Integer courseId){
         return orderService.createCourseOrder(courseId,uid);
     }
+
+    /**
+     * 创建租用订单
+     */
     @PostMapping("/create/rent")
     public ResultVO<CourseOrderVO> createRentCourseOrder(@RequestParam Integer courseId,@RequestParam Integer uid){
         return orderService.createRentCourseOrder(courseId,uid);
     }
+
+    /**
+     * 创建Vip订单
+     */
     @PostMapping("/create/vip/{studentId}")
     public ResultVO<CourseOrderVO> createVipOrder(@PathVariable Integer studentId){
         return orderService.createVipOrder(studentId);

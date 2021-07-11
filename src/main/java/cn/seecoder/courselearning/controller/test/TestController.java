@@ -18,15 +18,21 @@ public class TestController {
     @Resource
     TestService testService;
 
+
+    /**
+     * 创建测试
+     */
     @PostMapping("/create")
     public ResultVO<TestVO> createTest(@RequestBody TestVO testVO){
         return testService.createTest(testVO);
     }
 
+
+    /**
+     * 获取测试列表
+     */
     @GetMapping("/getAllTest/{courseID}")
     public List<TestVO> getAllTest(@PathVariable Integer courseID){
-        //todo
-        //搞定了（也许吧）——cjw
         return testService.getAllTest(courseID);
     }
 
@@ -36,14 +42,19 @@ public class TestController {
     }
 
 
+    /**
+     * 学生用户提交测试答案
+     */
     @PostMapping("/submit/{studentID}/{testID}")
     public ResultVO<TestVO> submitAnswer(@PathVariable Integer studentID,
                                          @PathVariable Integer testID,
                                          @RequestParam String answer){
-        //todo 这个我就没搞懂HH
         return testService.submitAnswer(studentID,testID,answer);
     }
 
+    /**
+     * 获取某用户的测试分数
+     */
     @GetMapping("/getTestResult/{testID}/{studentID}")
     public TestResultVO getTestResult(@PathVariable Integer studentID,
                                       @PathVariable Integer testID){

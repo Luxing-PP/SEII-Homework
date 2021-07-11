@@ -61,6 +61,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         for(CourseQuestion courseQuestion: tempList){
             ret.add(new CourseQuestionVO(courseQuestion));
         }
+        //按ID大小排序保证答案的唯一性
         ret=sort(ret);
         return ret;
     }
@@ -72,6 +73,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         for(CourseQuestion courseQuestion: tempList){
             ret.add(new CourseQuestionVO(courseQuestion));
         }
+        //按ID大小排序保证答案的唯一性
         ret=sort(ret);
         return ret;
     }
