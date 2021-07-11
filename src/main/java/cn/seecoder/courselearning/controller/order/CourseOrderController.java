@@ -17,10 +17,6 @@ public class CourseOrderController {
     /**
      * 创建课程订单
      */
-//    @PostMapping("/create")
-//    public ResultVO<CourseOrderVO> createCourseOrder(@RequestBody CourseOrderVO orderVO){
-//        return orderService.insertCourseOrder(orderVO);
-//    }
 
     @PostMapping("/create")
     public ResultVO<CourseOrderVO> createCourseOrder(@RequestParam Integer uid, @RequestParam Integer courseId){

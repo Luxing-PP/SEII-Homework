@@ -18,12 +18,12 @@ public class CourseRentServiceImpl implements CourseRentService {
         List<CourseRent> courseRent=courseRentMapper.selectByStudentIdandCourseId(student_id,course_id);
         if (courseRent.size()>=1) {
             for (CourseRent rent : courseRent) {
+                //判断是否已经过了租期租期
                 if (rent.getEnd_time().isAfter(LocalDateTime.now()))
                     return 1;
             }
-            return 0;
         }
-        else
-            return 0;
+        //无租用记录或已过租期返回无效
+        return 0;
     }
 }

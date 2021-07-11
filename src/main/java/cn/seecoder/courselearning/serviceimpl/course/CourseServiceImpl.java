@@ -94,6 +94,7 @@ public class CourseServiceImpl implements CourseService {
             course.setLiked(isLiked(uid,courseId));
 
             CourseOrder order = orderService.queryMostRecentOrder(uid, courseId);
+            //区分租用
             if(order != null&&(!order.getCourseName().startsWith("租用：")))
                 bought = order.getStatus().equals(Constant.ORDER_STATUS_SUCCESS);
             manageable = uid.equals(course.getTeacherId());

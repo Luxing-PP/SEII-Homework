@@ -117,6 +117,8 @@ public class TestServiceImpl implements TestService {
         Test test=testMapper.selectByPrimaryKey(testID);
         LocalDateTime localDateTime=LocalDateTime.now();
         System.out.println(localDateTime);
+
+        //检查获取时间的合理性，如果还未结束返回空对象
         if(localDateTime.isAfter(test.getEnd_time())){
         List<TestResult> testResult=testResultMapper.selectByTestIdAndStudentId(studentID,testID);
         if(testResult.size() != 0)

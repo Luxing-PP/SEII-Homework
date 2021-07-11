@@ -281,11 +281,15 @@ public class CourseOrderServiceImpl implements CourseOrderService {
     @Override
     public ResultVO<CourseOrderVO> createRentCourseOrder(Integer courseId, Integer userId) {
         List<CourseOrder> courseOrderList = orderMapper.selectByUserId(userId);
+
         boolean flag=true;
+
+        //1. 查看是否有未完成订单
         for(CourseOrder order: courseOrderList){
             if(order.getCourseId().equals(courseId)){
                 List<CourseRent> temp=courseRentMapper.selectByStudentIdandCourseId(userId,courseId);
                 for (CourseRent a:temp) {
+                    //判断租期
                     if(a.getEnd_time().isAfter(LocalDateTime.now())) {
                         flag = false;
                         break;
@@ -302,6 +306,8 @@ public class CourseOrderServiceImpl implements CourseOrderService {
                 }
             }
         }
+
+        //2. 无未完成订单，新建订单
         CourseOrder order = new CourseOrder();
 
         order.setUserId(userId);
@@ -324,6 +330,7 @@ public class CourseOrderServiceImpl implements CourseOrderService {
 
     @Override
     public ResultVO<CourseOrderVO> createVipOrder(Integer studentId) {
+        //构建特殊"课程" Vip
         CourseOrder order = new CourseOrder();
         order.setUserId(studentId);
         order.setCourseId(-1);

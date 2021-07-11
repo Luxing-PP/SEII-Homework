@@ -15,6 +15,9 @@ public class CourseRentController {
     CourseRentService courseRentService;
 
 
+    /**
+     * 判断某用户是否租用某课程
+     */
     @GetMapping("/hasrent/{studentid}/{courseId}")
     public Integer HasRentCourse(@PathVariable Integer studentid,@PathVariable Integer courseId){
         return courseRentService.isRent(studentid,courseId);

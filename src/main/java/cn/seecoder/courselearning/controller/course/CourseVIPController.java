@@ -16,6 +16,9 @@ public class CourseVIPController {
     VipService vipService;
 
 
+    /**
+     * 返回用户VIP相关信息
+     */
     @GetMapping("/isVip/{student_id}")
     public VipResultVO isVip(@PathVariable Integer student_id){
         return vipService.isVip(student_id);

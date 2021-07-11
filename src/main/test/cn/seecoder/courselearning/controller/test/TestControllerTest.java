@@ -1,5 +1,5 @@
-package cn.seecoder.courselearning.controller;
-import cn.seecoder.courselearning.controller.test.TestController;
+package cn.seecoder.courselearning.controller.test;
+
 import cn.seecoder.courselearning.vo.ResultVO;
 import cn.seecoder.courselearning.vo.course.CourseQuestionVO;
 import cn.seecoder.courselearning.vo.test.TestResultVO;
@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class TestControllerTest {
@@ -45,7 +48,7 @@ class TestControllerTest {
     void getAllTest() {
         List<TestVO> testVO=testController.getAllTest(1);
         LocalDateTime s=LocalDateTime.of(2021,6,13,10,0);
-        LocalDateTime e=LocalDateTime.of(2020,8,31,10,0);
+        LocalDateTime e=LocalDateTime.of(2021,8,31,10,0);
         assert (testVO.get(0).getId().equals(1));
         assert (testVO.get(0).getCourse_id().equals(1));
         assert (testVO.get(0).getStart_time().toString().equals(s.toString()));
@@ -62,15 +65,14 @@ class TestControllerTest {
 
     @Test
     void submitAnswer() {
-        //todo 不知道咋测0 0
         ResultVO<TestVO> resultVO=testController.submitAnswer(1,1,"ABC");
         System.out.println(resultVO);
 
     }
     @Test
     void getTestResult() {
+        //测试过期测试
         TestResultVO testResultVO=testController.getTestResult(1,1);
-        assert (testResultVO.getUser_score()==50);
-        assert (testResultVO.getUser_answer().equals("ABC"));
+        assert (testResultVO.getId()==null);
     }
 }

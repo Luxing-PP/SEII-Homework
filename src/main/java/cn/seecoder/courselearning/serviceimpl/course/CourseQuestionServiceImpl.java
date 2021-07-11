@@ -37,6 +37,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         );
         int resB = courseQuestionMapper.insert(courseQuestion);
 
+        // 3.两个操作都成功返回成功
         if(resA>0&&resB>0){
             courseQuestionVO.setId(courseQuestion.getId());
             return new ResultVO<CourseQuestionVO>(Constant.REQUEST_SUCCESS,"创建问题成功",courseQuestionVO);
