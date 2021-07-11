@@ -20,5 +20,4 @@ public class CourseVIPController {
     public VipResultVO isVip(@PathVariable Integer student_id){
         return vipService.isVip(student_id);
     }
-
 }
