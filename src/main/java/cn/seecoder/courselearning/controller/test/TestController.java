@@ -47,6 +47,11 @@ public class TestController {
     @GetMapping("/getTestResult/{testID}/{studentID}")
     public TestResultVO getTestResult(@PathVariable Integer studentID,
                                       @PathVariable Integer testID){
-        return testService.getTestResult(studentID,testID);
+
+        System.out.println("------------------**************");
+        System.out.println("studentid: " +  studentID);
+        System.out.println(testID);
+        TestResultVO testResultVO = testService.getTestResult(studentID,testID)
+        return testResultVO;
     }
 }
