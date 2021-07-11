@@ -19,10 +19,12 @@ class CourseOrderControllerTest {
     void createRentCourseOrder() {
         courseOrderController.createRentCourseOrder(1,1);
         courseOrderController.payOrder(1);
+        assert(courseOrderController.payOrder(1).getMsg().equals("付款失败,余额不足"));
     }
     @Test
     void vipOrder(){
         courseOrderController.createVipOrder(2);
-        System.out.println(courseOrderController.payOrder(1));
+       // System.out.println(courseOrderController.payOrder(1));
+        assert(courseOrderController.payOrder(1).getMsg().equals("付款失败,余额不足"));
     }
 }
